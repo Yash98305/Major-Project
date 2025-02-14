@@ -29,23 +29,23 @@ const Home = () => {
       return;
     }
     const options = {
-      method: 'POST', // HTTP method
-      url: 'https://ai-image-generator3.p.rapidapi.com/generate', // API endpoint
+      method: 'POST', 
+      url: 'https://ai-image-generator3.p.rapidapi.com/generate',
       headers: {
-        'x-rapidapi-key': '7e267062cfmshd373484378f95c2p1b2900jsn485083559359', // API key
-        'x-rapidapi-host': 'ai-image-generator3.p.rapidapi.com', // API host
-        'Content-Type': 'application/json' // Content type of the request
+        'x-rapidapi-key': process.env.API_KEY,
+        'x-rapidapi-host': 'ai-image-generator3.p.rapidapi.com',
+        'Content-Type': 'application/json' 
         },  
         data: {
-          prompt: query, // Data payload with the input text
-          page: 1 // Page number for the API request
+          prompt: query, 
+          page: 1
         }
       };
       
       try {
         setLoading(true)
-        const response = await axios.request(options); // Await the API response
-      console.log('API Response:', response); // Log the API response
+        const response = await axios.request(options);
+      console.log('API Response:', response); 
       console.log(response.data.results.images)
       setImages(response.data.results.images)
       
