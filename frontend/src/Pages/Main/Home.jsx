@@ -21,13 +21,20 @@ const Home = () => {
 
 
   const imageGenerator = async() =>{
+    if(query.length===0){
+     alert("Enter description")
+      return;
+    }else if(query.length<3){
+      alert("Description should be of more than 2 characters")
+      return;
+    }
     const options = {
       method: 'POST', // HTTP method
       url: 'https://ai-image-generator3.p.rapidapi.com/generate', // API endpoint
       headers: {
-          'x-rapidapi-key': '7e267062cfmshd373484378f95c2p1b2900jsn485083559359', // API key
-          'x-rapidapi-host': 'ai-image-generator3.p.rapidapi.com', // API host
-          'Content-Type': 'application/json' // Content type of the request
+        'x-rapidapi-key': '7e267062cfmshd373484378f95c2p1b2900jsn485083559359', // API key
+        'x-rapidapi-host': 'ai-image-generator3.p.rapidapi.com', // API host
+        'Content-Type': 'application/json' // Content type of the request
         },  
         data: {
           prompt: query, // Data payload with the input text
