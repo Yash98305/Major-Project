@@ -37,12 +37,15 @@ const Login = () => {
         );
         navigate("/home");
       } else {
-        toast.error(res.data.message);
+        toast.error(res?.data?.message ||
+          // res?.data ||
+          "Email not found");
       }
     } catch (error) {
+      console.log(1)
+
       toast.error( error.response?.data?.message ||
-        error.response?.data ||
-        "Login failed. Please try again.");
+        "Login failed Please try again.");
     }
   };
   const [showPassword, setShowPassword] = useState(false);
