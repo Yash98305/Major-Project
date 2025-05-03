@@ -7,6 +7,7 @@ import { toast } from "react-toastify"
 import { saveAs } from 'file-saver'
 import img from "../../Assets/noresult.png"
 import welImg from "../../Assets/welcome.png"
+import { useNavigate } from 'react-router-dom';
 const Home = () => {
   const [query, setQuery] = useState("");  
   const [images, setImages] = useState();
@@ -16,6 +17,7 @@ const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [fullScreenImage, setFullScreenImage] = useState(null);
   const [isPressed, setIsPressed] = useState(false);
+  const navigate = useNavigate();
   const imageGenerator = async () => {
     if (query.length === 0) {
       toast.error("Enter description");
@@ -99,7 +101,11 @@ const Home = () => {
       toast.error("Image download failed. Try again.");
     }
   };
-
+  useEffect(() => {
+    if (!auth?.token) {
+      navigate('/login'); // Adjust the path if your login route is different
+    }
+  }, [auth, navigate]);
   return (
     <>
       {/* Fullscreen Modal */}
@@ -178,6 +184,7 @@ const Home = () => {
           webkitBackdropFilter: "blur(20px) saturate(160%) contrast(45%) brightness(140%)",
           height: "100%",
           width: "350px", padding: "20px 20px 0 20px", fontWeight: "700", marginTop: "10px", fontFamily: "Georgia, serif", fontSize: "20px", wordWrap: " break-word"
+        ,scrollX:"hidden"
         }}>
           {history?.length > 0 ? (
             history.map((data, ind) => (

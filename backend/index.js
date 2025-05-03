@@ -10,7 +10,7 @@ const app = express();
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(express.json());
 app.use(cors({
-  origin: 'https://text-to-image-yashpatel.netlify.app',  
+  origin: 'https://text-to-image-yashpatel.netlify.app'||'http://localhost:3000 || *',  
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials:true
