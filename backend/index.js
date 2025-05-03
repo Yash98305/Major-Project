@@ -5,16 +5,26 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const helmet = require("helmet");
 
-
 const app = express();
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+
+// Security Headers
+app.use(helmet({
+  crossOriginResourcePolicy: false,
+  crossOriginEmbedderPolicy: false
+}));
+
+// Middleware
 app.use(express.json());
 app.use(cors({
-  origin: 'https://text-to-image-yashpatel.netlify.app'||'http://localhost:3000 || *',  
+  origin: [
+    'https://text-to-image-yashpatel.netlify.app',
+    'http://localhost:3000'
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials:true
+  credentials: true
 }));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet({
     crossOriginResourcePolicy: false,
